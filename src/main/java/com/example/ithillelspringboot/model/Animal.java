@@ -1,43 +1,25 @@
 package com.example.ithillelspringboot.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "animal")
+@Data
 public class Animal {
     @Id
-    @SequenceGenerator(
-            name = "animal_sequence",
-            sequenceName = "animal_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "animal_sequence"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String type;
     private String color;
 
     public Animal() {
-    }
-
-    public Animal(Integer id, String name, String type, String color) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.color = color;
-    }
-
-    public Animal(Integer id) {
-        this.id = id;
     }
 
     public Animal(String name, String type, String color) {

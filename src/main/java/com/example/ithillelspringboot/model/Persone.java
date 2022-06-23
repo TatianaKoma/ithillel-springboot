@@ -1,43 +1,36 @@
 package com.example.ithillelspringboot.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table
-
+@Table(name = "persone")
 public class Persone {
     @Id
-    @SequenceGenerator(
-            name = "persone_sequence",
-            sequenceName = "persone_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "persone_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "surname")
     private String surname;
+    @Column(name = "age")
     private Integer age;
 
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pa_fid", referencedColumnName = "id")
+    List<Animal> animals = new ArrayList<>();
+
     public Persone() {
-    }
-
-    public Persone(Integer id, String name, String surname, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
-
-    public Persone(Integer id) {
-        this.id = id;
     }
 
     public Persone(String name, String surname, Integer age) {
@@ -76,6 +69,14 @@ public class Persone {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
     }
 
     @Override

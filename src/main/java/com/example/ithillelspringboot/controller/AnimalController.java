@@ -33,7 +33,6 @@ public class AnimalController {
 
     @GetMapping(value = "/{animalId}")
     public Optional<Animal> getAnimal(@PathVariable("animalId") Integer animalId) {
-        System.out.println(animalId);
         return animalService.getAnimal(animalId);
     }
 
@@ -43,11 +42,10 @@ public class AnimalController {
         animalService.addNewAnimal(animal);
     }
 
-
     @PutMapping
     public void updateAnimal(@RequestBody Animal animal) {
         System.out.println(animal);
-        animalService.updateAnimal(animal.getId(), animal.getName(), animal.getType(), animal.getColor());
+        animalService.updateAnimal(animal);
     }
 
     @DeleteMapping(path = "/{animalId}")

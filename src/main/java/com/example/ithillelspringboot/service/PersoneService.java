@@ -37,26 +37,24 @@ public class PersoneService {
         personeRepository.deleteById(personeId);
     }
 
-
-    public void updatePersone(
-            Integer personeId, String name, String surname, Integer age) {
-        Persone persone = personeRepository.findById(personeId)
-                .orElseThrow(() -> new IllegalStateException("persone with id " + personeId +
+    public void updatePersone(Persone newPersone) {
+        Persone persone = personeRepository.findById(newPersone.getId())
+                .orElseThrow(() -> new IllegalStateException("persone with id " + newPersone.getId() +
                         " doesn't exists"));
-        if (name != null &&
-                name.length() > 0 &&
-                !Objects.equals(persone.getName(), name)) {
-            persone.setName(name);
+        if (newPersone.getName() != null &&
+                newPersone.getName().length() > 0 &&
+                !Objects.equals(persone.getName(), newPersone.getName())) {
+            persone.setName(newPersone.getName());
         }
-        if (surname != null &&
-                surname.length() > 0 &&
-                !Objects.equals(persone.getSurname(), surname)) {
-            persone.setSurname(surname);
+        if (newPersone.getSurname() != null &&
+                newPersone.getSurname().length() > 0 &&
+                !Objects.equals(persone.getSurname(), newPersone.getSurname())) {
+            persone.setSurname(newPersone.getSurname());
         }
-        if (age != null &&
-                age > 0 &&
-                !Objects.equals(persone.getAge(), age)) {
-            persone.setAge(age);
+        if (newPersone.getAge() != null &&
+                newPersone.getAge() > 0 &&
+                !Objects.equals(persone.getAge(), newPersone.getAge())) {
+            persone.setAge(newPersone.getAge());
         }
     }
 
@@ -64,4 +62,3 @@ public class PersoneService {
         return personeRepository.findById(personeId);
     }
 }
-

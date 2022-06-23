@@ -47,7 +47,7 @@ public class PersoneController {
     @PutMapping
     public void updatePersone(@RequestBody Persone persone) {
         System.out.println(persone);
-        personeService.updatePersone(persone.getId(), persone.getName(), persone.getSurname(), persone.getAge());
+        personeService.updatePersone(persone);
     }
 
     @DeleteMapping(path = "/{personeId}")

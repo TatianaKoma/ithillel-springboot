@@ -37,26 +37,24 @@ public class AnimalService {
         animalRepository.deleteById(animalId);
     }
 
-
-    public void updateAnimal(
-            Integer animalId, String name, String type, String color) {
-        Animal animal = animalRepository.findById(animalId)
-                .orElseThrow(() -> new IllegalStateException("animal with id " + animalId +
+    public void updateAnimal(Animal newAnimal) {
+        Animal animal = animalRepository.findById(newAnimal.getId())
+                .orElseThrow(() -> new IllegalStateException("animal with id " + newAnimal.getId() +
                         " doesn't exists"));
-        if (name != null &&
-                name.length() > 0 &&
-                !Objects.equals(animal.getName(), name)) {
-            animal.setName(name);
+        if (newAnimal.getName() != null &&
+                newAnimal.getName().length() > 0 &&
+                !Objects.equals(animal.getName(), newAnimal.getName())) {
+            animal.setName(newAnimal.getName());
         }
-        if (type != null &&
-                type.length() > 0 &&
-                !Objects.equals(animal.getType(), type)) {
-            animal.setType(type);
+        if (newAnimal.getType() != null &&
+                newAnimal.getType().length() > 0 &&
+                !Objects.equals(animal.getType(), newAnimal.getType())) {
+            animal.setType(newAnimal.getType());
         }
-        if (color != null &&
-                color.length() > 0 &&
-                !Objects.equals(animal.getColor(), color)) {
-            animal.setColor(color);
+        if (newAnimal.getColor() != null &&
+                newAnimal.getColor().length() > 0 &&
+                !Objects.equals(animal.getColor(), newAnimal.getColor())) {
+            animal.setColor(newAnimal.getColor());
         }
     }
 
@@ -64,4 +62,3 @@ public class AnimalService {
         return animalRepository.findById(animalId);
     }
 }
-
