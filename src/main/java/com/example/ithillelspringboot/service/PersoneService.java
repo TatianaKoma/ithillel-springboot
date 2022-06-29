@@ -24,8 +24,8 @@ public class PersoneService {
         return personeRepository.findAll();
     }
 
-    public void addNewPersone(Persone persone) {
-        personeRepository.save(persone);
+    public Persone addNewPersone(Persone persone) {
+        return personeRepository.save(persone);
     }
 
     public void deletePersone(Integer personeId) {
@@ -37,7 +37,7 @@ public class PersoneService {
         personeRepository.deleteById(personeId);
     }
 
-    public void updatePersone(Persone newPersone) {
+    public Persone updatePersone(Persone newPersone) {
         Persone persone = personeRepository.findById(newPersone.getId())
                 .orElseThrow(() -> new IllegalStateException("persone with id " + newPersone.getId() +
                         " doesn't exists"));
@@ -56,6 +56,7 @@ public class PersoneService {
                 !Objects.equals(persone.getAge(), newPersone.getAge())) {
             persone.setAge(newPersone.getAge());
         }
+        return personeRepository.save(persone);
     }
 
     public Optional<Persone> getPersone(Integer personeId) {

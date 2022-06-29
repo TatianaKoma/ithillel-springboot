@@ -24,8 +24,8 @@ public class AnimalService {
         return animalRepository.findAll();
     }
 
-    public void addNewAnimal(Animal animal) {
-        animalRepository.save(animal);
+    public Animal addNewAnimal(Animal animal) {
+       return animalRepository.save(animal);
     }
 
     public void deleteAnimal(Integer animalId) {
@@ -37,7 +37,7 @@ public class AnimalService {
         animalRepository.deleteById(animalId);
     }
 
-    public void updateAnimal(Animal newAnimal) {
+    public Animal updateAnimal(Animal newAnimal) {
         Animal animal = animalRepository.findById(newAnimal.getId())
                 .orElseThrow(() -> new IllegalStateException("animal with id " + newAnimal.getId() +
                         " doesn't exists"));
@@ -56,6 +56,7 @@ public class AnimalService {
                 !Objects.equals(animal.getColor(), newAnimal.getColor())) {
             animal.setColor(newAnimal.getColor());
         }
+        return animalRepository.save(animal);
     }
 
     public Optional<Animal> getAnimal(Integer animalId) {

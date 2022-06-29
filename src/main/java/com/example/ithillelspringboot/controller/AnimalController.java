@@ -37,15 +37,15 @@ public class AnimalController {
     }
 
     @PostMapping
-    public void registerNewAnimal(@RequestBody Animal animal) {
+    public Animal registerNewAnimal(@RequestBody Animal animal) {
         System.out.println(animal);
-        animalService.addNewAnimal(animal);
+        return animalService.addNewAnimal(animal);
     }
 
     @PutMapping
-    public void updateAnimal(@RequestBody Animal animal) {
+    public Animal updateAnimal(@RequestBody Animal animal) {
         System.out.println(animal);
-        animalService.updateAnimal(animal);
+        return animalService.updateAnimal(animal);
     }
 
     @DeleteMapping(path = "/{animalId}")

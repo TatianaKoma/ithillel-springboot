@@ -9,5 +9,4 @@ class IthillelSpringbootApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

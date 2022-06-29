@@ -38,16 +38,15 @@ public class PersoneController {
     }
 
     @PostMapping
-    public void registerNewPersone(@RequestBody Persone persone) {
+    public Persone registerNewPersone(@RequestBody Persone persone) {
         System.out.println(persone);
-        personeService.addNewPersone(persone);
+        return personeService.addNewPersone(persone);
     }
 
-
     @PutMapping
-    public void updatePersone(@RequestBody Persone persone) {
+    public Persone updatePersone(@RequestBody Persone persone) {
         System.out.println(persone);
-        personeService.updatePersone(persone);
+        return personeService.updatePersone(persone);
     }
 
     @DeleteMapping(path = "/{personeId}")
