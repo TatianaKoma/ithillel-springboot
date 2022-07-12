@@ -1,6 +1,7 @@
 package com.example.ithillelspringboot.controller;
 
 import com.example.ithillelspringboot.model.Animal;
+import com.example.ithillelspringboot.model.Persone;
 import com.example.ithillelspringboot.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,11 @@ public class AnimalController {
         return animalService.getAnimals();
     }
 
+    @GetMapping("/{animalId}/persone")
+    public Persone getPersoneByAnimalId(@PathVariable("animalId") Integer animalId) {
+        return animalService.getPersoneByAnimalId(animalId);
+    }
+
     @GetMapping(value = "/{animalId}")
     public Optional<Animal> getAnimal(@PathVariable("animalId") Integer animalId) {
         return animalService.getAnimal(animalId);
@@ -51,5 +57,10 @@ public class AnimalController {
     @DeleteMapping(path = "/{animalId}")
     public void deleteAnimal(@PathVariable("animalId") Integer animalId) {
         animalService.deleteAnimal(animalId);
+    }
+
+    @DeleteMapping("/{animalId}/with_persone")
+    public void deleteAnimalWithPersone(@PathVariable("animalId") Integer animalId) {
+        animalService.deleteAnimalWithPersone(animalId);
     }
 }

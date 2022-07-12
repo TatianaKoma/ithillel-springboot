@@ -21,7 +21,7 @@ public class PersoneService {
     }
 
     public List<Persone> getPersones() {
-        return personeRepository.findAll();
+        return (List<Persone>) personeRepository.findAll();
     }
 
     public Persone addNewPersone(Persone persone) {
@@ -38,8 +38,8 @@ public class PersoneService {
     }
 
     public Persone updatePersone(Persone newPersone) {
-        Persone persone = personeRepository.findById(newPersone.getId())
-                .orElseThrow(() -> new IllegalStateException("persone with id " + newPersone.getId() +
+        Persone persone = personeRepository.findById(newPersone.getPersoneId())
+                .orElseThrow(() -> new IllegalStateException("persone with id " + newPersone.getPersoneId() +
                         " doesn't exists"));
         if (newPersone.getName() != null &&
                 newPersone.getName().length() > 0 &&

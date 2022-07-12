@@ -1,72 +1,34 @@
 package com.example.ithillelspringboot.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "animal")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "animal_id", updatable = false, nullable = false)
+    private Integer animal_id;
     private String name;
     private String type;
     private String color;
 
-    public Animal() {
-    }
-
-    public Animal(String name, String type, String color) {
-        this.name = name;
-        this.type = type;
-        this.color = color;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", color='" + color + '\'' +
-                '}';
-    }
+    @ManyToOne
+    @JoinColumn(name = "persone_id")
+    @JsonIgnoreProperties("animals")
+    private Persone persone;
 }

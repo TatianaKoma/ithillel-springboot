@@ -33,7 +33,7 @@ public class PersoneServiceTests {
     @Test
     public void addNewPersoneTest() {
         Persone persone = new Persone();
-        persone.setId(1);
+        persone.setPersoneId(1);
         persone.setName("Alice");
         persone.setSurname("Smith");
         persone.setAge(27);
@@ -45,7 +45,7 @@ public class PersoneServiceTests {
     @Test
     public void getPersoneTest() {
         Persone persone = new Persone();
-        persone.setId(1);
+        persone.setPersoneId(1);
         persone.setName("Alice");
         persone.setSurname("Smith");
         persone.setAge(27);
@@ -77,20 +77,20 @@ public class PersoneServiceTests {
     @Test
     public void deletePersoneTest() {
         Persone persone = new Persone();
-        persone.setId(1);
+        persone.setPersoneId(1);
         persone.setName("Alice");
         persone.setSurname("Smith");
         persone.setAge(27);
 
         Mockito.when(personeRepository.findById(1)).thenReturn(Optional.of(persone));
-        Mockito.when(personeRepository.existsById(persone.getId())).thenReturn(false);
-        assertFalse(personeRepository.existsById(persone.getId()));
+        Mockito.when(personeRepository.existsById(persone.getPersoneId())).thenReturn(false);
+        assertFalse(personeRepository.existsById(persone.getPersoneId()));
     }
 
     @Test
     public void updatePersoneTest() {
         Persone persone = new Persone();
-        persone.setId(1);
+        persone.setPersoneId(1);
         persone.setName("Alice");
         persone.setSurname("Smith");
         persone.setAge(27);

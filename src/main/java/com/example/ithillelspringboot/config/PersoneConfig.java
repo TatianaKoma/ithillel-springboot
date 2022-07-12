@@ -15,11 +15,25 @@ public class PersoneConfig {
     @Bean
     CommandLineRunner commandLineRunner(PersoneRepository repository) {
         return args -> {
-            Persone mark = new Persone("Mark", "Grant", 25);
-            Persone maria = new Persone("Maria", "Peterson", 24);
+            Persone mark = new Persone();
+            mark.setName("Mark");
+            mark.setSurname("Smith");
+            mark.setAge(27);
+            Persone maria = new Persone();
+            maria.setName("Maria");
+            maria.setSurname("Grant");
+            maria.setAge(25);
 
-            Animal tuzik = new Animal("Tuzik", "dog", "white");
-            Animal barsik = new Animal("Barsik", "cat", "black");
+            Animal tuzik = new Animal();
+            tuzik.setName("Tuzik");
+            tuzik.setType("dog");
+            tuzik.setColor("white");
+            tuzik.setPersone(mark);
+            Animal barsik = new Animal();
+            barsik.setName("Barsik");
+            barsik.setType("cat");
+            barsik.setColor("grey");
+            barsik.setPersone(mark);
             List<Animal> animals = Arrays.asList(tuzik, barsik);
             mark.setAnimals(animals);
             repository.saveAll(List.of(mark, maria));

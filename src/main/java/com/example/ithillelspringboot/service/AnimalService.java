@@ -1,7 +1,11 @@
 package com.example.ithillelspringboot.service;
 
 import com.example.ithillelspringboot.model.Animal;
+import com.example.ithillelspringboot.model.Persone;
 import com.example.ithillelspringboot.repository.AnimalRepository;
+import com.example.ithillelspringboot.repository.PersoneRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +18,23 @@ import java.util.Optional;
 @Transactional
 public class AnimalService {
     private final AnimalRepository animalRepository;
+    private final PersoneRepository personeRepository;
+    private final SessionFactory sessionFactory;
 
     @Autowired
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository,
+                         PersoneRepository personeRepository, SessionFactory sessionFactory) {
         this.animalRepository = animalRepository;
+        this.personeRepository = personeRepository;
+        this.sessionFactory = sessionFactory;
     }
 
     public List<Animal> getAnimals() {
-        return animalRepository.findAll();
+        return (List<Animal>) animalRepository.findAll();
     }
 
     public Animal addNewAnimal(Animal animal) {
-       return animalRepository.save(animal);
+        return animalRepository.save(animal);
     }
 
     public void deleteAnimal(Integer animalId) {
@@ -37,9 +46,21 @@ public class AnimalService {
         animalRepository.deleteById(animalId);
     }
 
+    public void deleteAnimalWithPersone(Integer animalId) {
+        Integer personeId = animalRepository.findById(animalId).get().getPersone().getPersoneId();
+        animalRepository.deleteById(animalId);
+        personeRepository.deleteById(personeId);
+    }
+
+    public Persone getPersoneByAnimalId(Integer animalId) {
+        Session currentSession = this.sessionFactory.openSession();
+        Animal animal = currentSession.find(Animal.class, animalId);
+        return animal.getPersone();
+    }
+
     public Animal updateAnimal(Animal newAnimal) {
-        Animal animal = animalRepository.findById(newAnimal.getId())
-                .orElseThrow(() -> new IllegalStateException("animal with id " + newAnimal.getId() +
+        Animal animal = animalRepository.findById(newAnimal.getAnimal_id())
+                .orElseThrow(() -> new IllegalStateException("animal with id " + newAnimal.getAnimal_id() +
                         " doesn't exists"));
         if (newAnimal.getName() != null &&
                 newAnimal.getName().length() > 0 &&

@@ -1,5 +1,4 @@
 package com.example.ithillelspringboot.controller;
-
 import com.example.ithillelspringboot.model.Persone;
 import com.example.ithillelspringboot.service.PersoneService;
 import org.springframework.beans.factory.annotation.Autowired;
